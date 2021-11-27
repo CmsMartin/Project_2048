@@ -4,62 +4,62 @@
 #include <deque>
 
 inline extern void OutPut(int mp[5][5] , int& score) {
-    printf("Score = %d\n", score); //·ÖÊý¼´Îª×î´óµÄ·½¿é
-    for (int j = 1; j <= 4; ++j) //Êä³öÉÏ±ß¿ò
+    printf("Score = %d\n", score); //åˆ†æ•°å³ä¸ºæœ€å¤§çš„æ–¹å—
+    for (int j = 1; j <= 4; ++j) //è¾“å‡ºä¸Šè¾¹æ¡†
         printf("------");
     printf("\n");
     for (int i = 1; i <= 4; ++i) {
         for (int j = 1; j <= 4; ++j) {
             printf("|");
-            if (mp[i][j]) { //Èç¹ûÔªËØ²»Îª0.Êä³ö£¬¸üÐÂ score
+            if (mp[i][j]) { //å¦‚æžœå…ƒç´ ä¸ä¸º0.è¾“å‡ºï¼Œæ›´æ–° score
                 if (score < mp[i][j])
                     score = mp[i][j];
                 printf("%5d" ,mp[i][j]);
             }
-            else //ÔªËØÎª 0 ¿Õ¸ñÌî³ä
+            else //å…ƒç´ ä¸º 0 ç©ºæ ¼å¡«å……
                 printf("     ");
 
         }
-        printf("|\n"); //ÔªËØÓëÔªËØÖ®¼äÓÃ | ·Ö¸ô
-        for (int j = 1; j <= 4; ++j) //Êä³öÏÂ±ß½ç
+        printf("|\n"); //å…ƒç´ ä¸Žå…ƒç´ ä¹‹é—´ç”¨ | åˆ†éš”
+        for (int j = 1; j <= 4; ++j) //è¾“å‡ºä¸‹è¾¹ç•Œ
             printf("------");
         printf("\n");
     }
-    printf("w : up  s : down  a : left  d : right\n"); //ÌáÊ¾ÐÔÓï¾ä
+    printf("w : up  s : down  a : left  d : right\n"); //æç¤ºæ€§è¯­å¥
     // printf("push 'r' to start a new game\n");
     printf("push 'e' to exit game\n");
 }
 
 void extern Up(int (*mp)[5]) {
     std::deque<int> Num;
-    for (int i = 1; i <= 4; i++) { //1 ~ 4 ÁÐ
-        Num.clear(); //Çå¿Õ
-        for (int j = 1; j <= 4; j++) { //Ñ°ÕÒ¸ÃÁÐ·Ç 0 Ïî 
+    for (int i = 1; i <= 4; i++) { //1 ~ 4 åˆ—
+        Num.clear(); //æ¸…ç©º
+        for (int j = 1; j <= 4; j++) { //å¯»æ‰¾è¯¥åˆ—éž 0 é¡¹ 
             if (mp[j][i] == 0) continue;
             Num.push_back(mp[j][i]);
             mp[j][i] = 0;
         }
-        if (Num.empty()) continue; //¿ÕÁÐ
+        if (Num.empty()) continue; //ç©ºåˆ—
         int Head, Tail;
         while (true) {
             Head = Num.front();
             Num.pop_front();
-            Num.push_back(Head); //½«¸ÃÁÐµÚÒ»¸öÔªËØ¼ÓÈë¶ÓÎ²
+            Num.push_back(Head); //å°†è¯¥åˆ—ç¬¬ä¸€ä¸ªå…ƒç´ åŠ å…¥é˜Ÿå°¾
             int Size = Num.size();
-            for (int i = 2; i <= Size; i++) { //Ñ­»·¶ÓÁÐ
-                Tail = Num.back(); //È¡³ö¶ÓÎ²
-                Head = Num.front(); //È¡³ö¶ÓÍ·
+            for (int i = 2; i <= Size; i++) { //å¾ªçŽ¯é˜Ÿåˆ—
+                Tail = Num.back(); //å–å‡ºé˜Ÿå°¾
+                Head = Num.front(); //å–å‡ºé˜Ÿå¤´
                 Num.pop_front();
-                //´ËÊ±µÄ¶ÓÍ·Óë¶ÓÁÐÎ²ÊÇÁ½¸öÏàÁÚµÄÔªËØ
-                if (Head == Tail) { //ºÏ²¢
+                //æ­¤æ—¶çš„é˜Ÿå¤´ä¸Žé˜Ÿåˆ—å°¾æ˜¯ä¸¤ä¸ªç›¸é‚»çš„å…ƒç´ 
+                if (Head == Tail) { //åˆå¹¶
                     Num.pop_back();
                     Num.push_back(Tail + Head);
                 }
-                else { //ÎÞ·¨ºÏ²¢
+                else { //æ— æ³•åˆå¹¶
                     Num.push_back(Head);
                 }
             }
-            if (Size == Num.size()) break; //ÔªËØÊýÁ¿Ã»ÓÐ±ä»¯£¬ÍË³ö
+            if (Size == Num.size()) break; //å…ƒç´ æ•°é‡æ²¡æœ‰å˜åŒ–ï¼Œé€€å‡º
         }
         for (int j = 0; j < Num.size(); j++) { //update
             mp[j + 1][i] = Num[j];
@@ -105,36 +105,35 @@ void extern Down(int(*mp)[5]) {
 
 void extern Left(int(*mp)[5]) {
     std::deque<int> Num;
-    for (int i = 1; i <= 4; i++) { //1 ~ 4 ÁÐ
-        Num.clear(); //Çå¿Õ
-        for (int j = 1; j <= 4; j++) { //Ñ°ÕÒ¸ÃÁÐ·Ç 0 Ïî 
+    for (int i = 1; i <= 4; i++) { 
+        Num.clear();
+        for (int j = 1; j <= 4; j++) {
             if (mp[i][j] == 0) continue;
             Num.push_back(mp[i][j]);
             mp[i][j] = 0;
         }
-        if (Num.empty()) continue; //¿ÕÁÐ
+        if (Num.empty()) continue;
         int Head, Tail;
         while (true) {
             Head = Num.front();
             Num.pop_front();
-            Num.push_back(Head); //½«¸ÃÁÐµÚÒ»¸öÔªËØ¼ÓÈë¶ÓÎ²
+            Num.push_back(Head);
             int Size = Num.size();
-            for (int i = 2; i <= Size; i++) { //Ñ­»·¶ÓÁÐ
-                Tail = Num.back(); //È¡³ö¶ÓÎ²
-                Head = Num.front(); //È¡³ö¶ÓÍ·
+            for (int i = 2; i <= Size; i++) {
+                Tail = Num.back(); 
+                Head = Num.front(); 
                 Num.pop_front();
-                //´ËÊ±µÄ¶ÓÍ·Óë¶ÓÁÐÎ²ÊÇÁ½¸öÏàÁÚµÄÔªËØ
-                if (Head == Tail) { //ºÏ²¢
+                if (Head == Tail) { 
                     Num.pop_back();
                     Num.push_back(Tail + Head);
                 }
-                else { //ÎÞ·¨ºÏ²¢
+                else {
                     Num.push_back(Head);
                 }
             }
-            if (Size == Num.size()) break; //ÔªËØÊýÁ¿Ã»ÓÐ±ä»¯£¬ÍË³ö
+            if (Size == Num.size()) break; 
         }
-        for (int j = 0; j < Num.size(); j++) { //update
+        for (int j = 0; j < Num.size(); j++) { 
             mp[i][j + 1] = Num[j];
         }
     }
@@ -178,20 +177,20 @@ void extern Right(int(*mp)[5]) {
 
 
 bool extern Run(char op , int(*mp)[5]) {
-    switch (op) { //¼ì²â£¬²Ù×÷
-    case 'w': //ÉÏ
+    switch (op) { //æ£€æµ‹ï¼Œæ“ä½œ
+    case 'w': //ä¸Š
         Up(mp);
         return true;
         break;
-    case 's': //ÏÂ
+    case 's': //ä¸‹
         Down(mp);
         return true;
         break;
-    case 'a': //×ó
+    case 'a': //å·¦
         Left(mp);
         return true;
         break;
-    case 'd': //ÓÒ
+    case 'd': //å³
         Right(mp);
         return true;
         break;
