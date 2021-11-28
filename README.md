@@ -26,7 +26,7 @@ If Size is size, then this merge fails, exits,
 
 If Size! s Size', the merge succeeds and continues the process until it fails.
 
-Finally, replace the columns with elements in the two-ended queue.
+Finally, replace the columns with elements in the deque.
 
 ## Update
 
