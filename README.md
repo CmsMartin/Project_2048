@@ -16,7 +16,7 @@ You can read it on bilibili ： https://www.bilibili.com/read/cv14189181
 
 Again, only the up merge operation is explained.
 
-Up is the operation on each column, for each column, we can put non-0 elements into a two-ended queue, record the number of elements, and set the column to 0
+Up is the operation on each column, for each column, we can put non-0 elements into a deque, record the number of elements, and set the column to 0
 
 Add the first element to the end of the team, and then size - 1 this loop, at this time can ensure that the team head and the team tail is adjacent elements, if the team head and the team tail is different, pop the team head element, the element into the team tail, if the team head and the team tail is the same, you can merge, pop the team head, pop the team tail, add up, press into the team tail ~~(STL method is good)~~
 
