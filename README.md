@@ -2,6 +2,8 @@
 
 ## About
 
+**If you are in China and do not want to waste your life, please visit https://hub.fastgit.org/CmsMartin/Project_2048**
+
 This is a command line game written in C++. The compiler is Visual Studio, and C++11 is used as the language standard for compilation. 
 
 And you can use 'w' to merge up, use 'a' to merge left, use 's' to merge down ,use 'd' to merge right.
